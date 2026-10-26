@@ -1,0 +1,81 @@
+{
+  "pluginAlias": "DisplayDeck",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "Adds one HomeKit switch for each display profile saved in DisplayDeck. Switches appear and disappear on their own as you add and delete profiles. DisplayDeck must be running on your Windows PC with **Allow other devices (phone)** turned on.",
+  "footerDisplay": "The access key is the part after `?key=` in the link on DisplayDeck's Phone page. Treat it like a password.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "DisplayDeck",
+        "description": "Shown in the Homebridge log."
+      },
+      "host": {
+        "title": "PC address",
+        "type": "string",
+        "required": true,
+        "placeholder": "192.168.1.50",
+        "description": "The IP address or name of the PC that runs DisplayDeck."
+      },
+      "port": {
+        "title": "Port",
+        "type": "integer",
+        "default": 8765,
+        "minimum": 1,
+        "maximum": 65535,
+        "description": "DisplayDeck uses 8765 unless you changed it."
+      },
+      "accessKey": {
+        "title": "Access key",
+        "type": "string",
+        "placeholder": "0123456789abcdef0123456789abcdef",
+        "pattern": "^[0-9a-fA-F]*$",
+        "description": "Copy it from the link on DisplayDeck's Phone page (the part after ?key=). Leave it empty only if Homebridge runs on the same PC as DisplayDeck."
+      },
+      "pollSeconds": {
+        "title": "Check for changes every (seconds)",
+        "type": "integer",
+        "default": 5,
+        "minimum": 2,
+        "maximum": 300,
+        "description": "How often the plugin looks for profiles that were added, deleted or switched on the PC."
+      },
+      "profiles": {
+        "title": "Only these profiles",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "title": "Profile name"
+        },
+        "description": "Leave empty to show every profile. Names must match DisplayDeck exactly."
+      },
+      "namePrefix": {
+        "title": "Name prefix",
+        "type": "string",
+        "placeholder": "Display: ",
+        "description": "Added in front of every switch name, for example \"Display: \" gives \"Display: Desk\"."
+      },
+      "undoSwitch": {
+        "title": "Add an \"Undo layout\" button",
+        "type": "boolean",
+        "default": false,
+        "description": "A button that goes back to the display layout from before the last change."
+      }
+    },
+    "required": ["host"]
+  },
+  "layout": [
+    { "key": "host" },
+    { "key": "accessKey" },
+    {
+      "type": "fieldset",
+      "title": "Options",
+      "expandable": true,
+      "expanded": false,
+      "items": ["name", "port", "pollSeconds", "undoSwitch", "namePrefix", { "key": "profiles", "type": "array", "items": [{ "key": "profiles[]" }] }]
+    }
+  ]
+}

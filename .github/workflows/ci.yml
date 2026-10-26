@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - name: Check what the package contains
+        run: |
+          npm pack --dry-run --json > pack.json
+          node -e "const files=require('./pack.json')[0].files.map(f=>f.path); const ok=f=>/^(dist\/|config\.schema\.json$|README\.md$|LICENSE$|package\.json$)/.test(f); const bad=files.filter(f=>!ok(f)); if(bad.length){console.error('Unexpected files in the package:', bad); process.exit(1)} console.log(files.join('\n'))"

@@ -1,0 +1,50 @@
+{
+  "name": "homebridge-displaydeck",
+  "displayName": "DisplayDeck",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Switch your DisplayDeck display profiles from HomeKit: one switch per profile, kept in sync automatically.",
+  "author": "NPLAudio",
+  "license": "MIT",
+  "homepage": "https://github.com/NPLAudio/homebridge-displaydeck#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NPLAudio/homebridge-displaydeck.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NPLAudio/homebridge-displaydeck/issues"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "supports-hap",
+    "displaydeck",
+    "homekit",
+    "monitors",
+    "display-profiles"
+  ],
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "config.schema.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": "^18.20.4 || ^20.15.1 || ^22.10.0 || ^24.0.0",
+    "homebridge": "^1.8.0 || ^2.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test test/*.test.ts",
+    "check": "npm run typecheck && npm run build && npm test",
+    "prepublishOnly": "npm run check",
+    "e2e": "node scripts/e2e-homebridge.ts"
+  },
+  "devDependencies": {
+    "@homebridge/hap-nodejs": "2.2.2",
+    "@types/node": "^22.20.5",
+    "homebridge": "^2.4.0",
+    "typescript": "~6.0.3"
+  }
+}
