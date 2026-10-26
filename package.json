@@ -39,8 +39,7 @@
     "test": "node --test test/*.test.ts",
     "check": "npm run typecheck && npm run build && npm test",
     "prepublishOnly": "npm run check",
-    "e2e": "node scripts/e2e-homebridge.ts",
-    "prepare": "npm run build"
+    "e2e": "node scripts/e2e-homebridge.ts"
   },
   "devDependencies": {
     "@homebridge/hap-nodejs": "2.2.2",
