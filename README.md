@@ -5,6 +5,8 @@ profile** saved in DisplayDeck, a Windows app that saves monitor layouts and aud
 "Living Room", "Den TV"). Say "Hey Siri, turn on Living Room", tap a switch in the Home app, or use one in an automation, and
 the PC changes its screens and sound output.
 
+It is free and made in spare time. If it saves you a few clicks, a [coffee](https://buymeacoffee.com/notpunny) is always appreciated, and never expected.
+
 - **One switch per profile.** Turn one on and DisplayDeck applies that profile. The switch for the active profile reads on, and
   the others read off, even when you change profiles on the PC, from your phone or from a Stream Deck.
 - **Keeps itself up to date.** The plugin checks DisplayDeck every few seconds. Save a profile and its switch appears in the
@@ -126,6 +128,12 @@ npm run check   # type-check, build and run the tests
 
 The tests run the plugin against a stand-in DisplayDeck server and the real HAP library, so switches behave as they would for
 HomeKit. Node.js 22 or 24 is needed to run them (they use Node's built-in test runner and TypeScript support).
+
+## Support
+
+This plugin is free and open source. If it is useful to you, you can [buy me a coffee](https://buymeacoffee.com/notpunny).
+
+<a href="https://buymeacoffee.com/notpunny"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buymeacoffee&logoColor=black" alt="Buy me a coffee" height="36"></a>
 
 ## License
 
