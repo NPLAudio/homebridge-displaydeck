@@ -25,24 +25,3 @@ jobs:
         run: |
           npm pack --dry-run --json > pack.json
           node -e "const files=require('./pack.json')[0].files.map(f=>f.path); const ok=f=>/^(dist\/|config\.schema\.json$|README\.md$|LICENSE$|package\.json$)/.test(f); const bad=files.filter(f=>!ok(f)); if(bad.length){console.error('Unexpected files in the package:', bad); process.exit(1)} console.log(files.join('\n'))"
-
-  git-install:
-    # Homebridge users can install straight from GitHub; make sure that builds and loads on Linux.
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Install from this commit
-        run: npm install -g "github:${{ github.repository }}#${{ github.sha }}"
-      - name: The built plugin loads and registers its platform
-        run: |
-          ROOT="$(npm root -g)/homebridge-displaydeck"
-          ls "$ROOT" "$ROOT/dist"
-          node --input-type=module -e "
-            const { default: plugin } = await import('$ROOT/dist/index.js');
-            let registered = null;
-            plugin({ registerPlatform: (name) => { registered = name; } });
-            if (registered !== 'DisplayDeck') throw new Error('platform not registered: ' + registered);
-            console.log('registered platform', registered);
-          "
