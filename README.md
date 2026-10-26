@@ -22,17 +22,33 @@ the PC changes its screens and sound output.
 
 ## Install
 
-From the Homebridge UI, search for **DisplayDeck** and install it, or from a terminal on the Homebridge machine:
+Pick one. Run the commands in the Homebridge terminal (SSH, or the terminal built into the Homebridge UI). On the standard
+Raspberry Pi, Ubuntu and Debian installs, use `sudo` and `--unsafe-perm` as shown; on setups where Homebridge runs without
+`sudo`, leave them out.
+
+**From a GitHub release** (works today, no npm account needed):
 
 ```sh
-npm install -g homebridge-displaydeck
+sudo npm install -g --unsafe-perm https://github.com/NPLAudio/homebridge-displaydeck/releases/download/v0.1.0/homebridge-displaydeck-0.1.0.tgz
 ```
 
-To install a copy you built yourself, run `npm pack` in this folder and install the `.tgz` it makes:
+To update, run the same command with the newer version number from the [releases page](https://github.com/NPLAudio/homebridge-displaydeck/releases).
+
+**From npm** (once the package is published there):
 
 ```sh
-npm install -g ./homebridge-displaydeck-0.1.0.tgz
+sudo npm install -g --unsafe-perm homebridge-displaydeck
 ```
+
+You can also search for **DisplayDeck** in the Homebridge UI's plugin tab when it is on npm.
+
+**From a copy you built yourself:** run `npm pack` in this folder, copy the `.tgz` it makes to the Homebridge machine, and install it:
+
+```sh
+sudo npm install -g --unsafe-perm ./homebridge-displaydeck-0.1.0.tgz
+```
+
+Then restart Homebridge (`sudo hb-service restart` on a standard install, or from the UI).
 
 ## Set up
 
